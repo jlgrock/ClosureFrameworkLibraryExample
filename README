@@ -1,0 +1,5 @@
+ClosureFrameworkJQueryExample
+=============================
+
+An example of the creating a single reusable library with the Closure Compiler/Library using the 
+jlgrock Closure maven plugin (https://github.com/jlgrock/ClosureJavascriptFramework)

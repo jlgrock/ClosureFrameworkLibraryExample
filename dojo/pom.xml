@@ -1,0 +1,90 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.github.jlgrock.ClosureFramework.LibraryExample</groupId>
+		<artifactId>LibraryExample</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>LibraryExampleDojoWidget</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>war</packaging>
+
+	<properties>
+		<dojo.version>1.7.2</dojo.version>
+	</properties>
+	
+	<dependencies>
+		<dependency>
+			<groupId>com.github.jlgrock.ClosureFramework.LibraryExample</groupId>
+			<artifactId>LibraryExampleSharedCode</artifactId>
+			<version>${project.version}</version>
+			<type>jsar</type>
+		</dependency>
+	</dependencies>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.github.jlgrock.javascript-framework</groupId>
+				<artifactId>jsar-maven-plugin</artifactId>
+				<version>${jsframework.version}</version>
+				<extensions>true</extensions>
+			</plugin>
+			
+			<!-- Extract Dojo Dependency -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>unpack dojo</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>unpack</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>org.dojotoolkit</groupId>
+									<artifactId>dojo</artifactId>
+									<version>${dojo.version}</version>
+									<type>zip</type>
+								</artifactItem>
+							</artifactItems>
+							<outputDirectory>${project.build.directory}${file.separator}${project.build.finalName}${file.separator}javascript</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- publishes the jsdocs -->
+			<plugin>
+				<groupId>com.github.jlgrock.javascript-framework</groupId>
+				<artifactId>jsdocs-maven-plugin</artifactId>
+				<version>${jsframework.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>jsar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- publishes aggregate source code into an archive -->
+			<plugin>
+				<groupId>com.github.jlgrock.javascript-framework</groupId>
+				<artifactId>source-archive-maven-plugin</artifactId>
+				<version>${jsframework.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>js-gen-source-archive</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>
