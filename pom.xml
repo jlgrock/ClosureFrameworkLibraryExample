@@ -7,7 +7,7 @@
 	<packaging>pom</packaging>
 
 	<properties>
-		<jsframework.version>1.11.13</jsframework.version>
+		<jsframework.version>1.13.0</jsframework.version>
 	</properties>
 
 	<modules>
