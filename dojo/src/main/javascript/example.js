@@ -22,7 +22,7 @@ com.github.ClosureFrameworkDojoExample.rotateColorFunction = function(obj) {
 	var rgb2hex = com.github.ClosureFrameworkLibraryExample.rgb2hex;
 	for (var i = 0; i < colors.length; i=i+1) {
 		
-		var cssColor = (/**@type {string} */ dojo.getStyle("para", "color"));
+		var cssColor = /**@type {string} */ (dojo.getStyle("para", "color"));
 		if (colors[i]===rgb2hex(cssColor)) {
 			if ((i+1) === colors.length) {
 				dojo.setStyle("para", "color", colors[0]);
